@@ -62,4 +62,18 @@ void Logger::fatal(LogEvent::ptr event)
     log(LogLevel::DEBUG, event);
 }
 
+FileLogAppender::FileLogAppender (const std::string& filename)
+{
+
+}
+
+void FileLogAppender::log(LogLevel::Level level, LogEvent::ptr event)
+{
+
+}
+
+void StdoutLogAppender::log(LogLevel::Level level, LogEvent::ptr event)
+{
+    
+}
 }
