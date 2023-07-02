@@ -66,6 +66,7 @@ private:
     {
     public:
         typedef std::shared_ptr<FormatItem> ptr;
+        FormatItem (const std::string& fmt = " ");
         virtual ~FormatItem(){}
         virtual void format(std::ostream& os , std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) = 0;
     };
@@ -113,6 +114,7 @@ public:
     LogLevel::Level getLevel() const {return m_level;}
     void setLevel (LogLevel::Level val) {m_level = val;}
 
+    const std::string& getName() const {return m_name;}
 private:
     std::string m_name;        //日志名称
     LogLevel::Level m_level;  //日志级别
