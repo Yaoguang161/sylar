@@ -241,6 +241,24 @@ public:
     }
 };
 
+class ElapseFormatItem: public LogFormatter::FormatItem
+{
+public:
+    void format(std::ostream& os, std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) override
+    {
+       os << LogLevel::ToString(level);
+    }
+};
+
+class ElapseFormatItemFormatItem: public LogFormatter::FormatItem
+{
+public:
+    void format(std::ostream& os, std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) override
+    {
+       os << LogLevel::ToString(level);
+    }
+};
+
 
     const char*         m_file     = nullptr; //文件名
     int32_t             m_line     = 0;       //行号 //int32_t 是一个固定长度的整数类型，可以确保在不同的系统上使用相同长度的整数类型。

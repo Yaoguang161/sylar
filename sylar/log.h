@@ -10,6 +10,7 @@
 #include <vector>
 namespace sylar 
 {
+class Logger;
 //日志时间
 class LogEvent
 {
@@ -50,6 +51,7 @@ public:
     };
     static const char* ToString(LogLevel::Level level);
 };
+
 //日志格式器
 class LogFormatter
 {
@@ -58,14 +60,14 @@ public:
     LogFormatter(const std::string& pattern);
 
     //%t %thread_id %m%n
-    std::string format(LogLevel::Level , LogEvent::ptr event);
+    std::string format(std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event);
 private:
     class FormatItem
     {
     public:
         typedef std::shared_ptr<FormatItem> ptr;
         virtual ~FormatItem(){}
-        virtual void format(std::ostream& os ,LogLevel::Level, LogEvent::ptr event) = 0;
+        virtual void format(std::ostream& os , std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) = 0;
     };
 
     void init();
@@ -81,14 +83,15 @@ public:
     typedef std::shared_ptr<LogAppender> ptr;
     virtual ~LogAppender() {}
 
-    virtual void log(LogLevel::Level level, LogEvent::ptr event) = 0;
+    virtual void log(std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) = 0;
+
+    void setFormatter(LogFormatter::ptr val) {m_formatter = val;}
+    LogFormatter::ptr getFormatter() const {return m_formatter;}
 
 protected: 
     LogLevel::Level m_level;
     LogFormatter::ptr m_formatter;
 };
-
-
 
 //日志器
 class Logger
@@ -121,7 +124,7 @@ class StdoutLogAppender : public LogAppender
 {
 public:  
     typedef std::shared_ptr<StdoutLogAppender> ptr;
-    void log(LogLevel::Level level, LogEvent::ptr event) override;
+    void log(std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) override;
 };
 
 //定义输出到文件的Appender
@@ -130,7 +133,7 @@ class FileLogAppender : public LogAppender
 public:
     typedef std::shared_ptr<FileLogAppender> ptr;
     FileLogAppender (const std::string& filename);
-    void log(LogLevel::Level level, LogEvent::ptr event) override;
+    void log(std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) override;
 
     //重新打开文件,文件打开成功返回true
     bool reopen();
