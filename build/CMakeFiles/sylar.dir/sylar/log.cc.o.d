@@ -162,4 +162,5 @@ CMakeFiles/sylar.dir/sylar/log.cc.o: \
  /usr/include/c++/13.1.1/bits/stl_multimap.h \
  /usr/include/c++/13.1.1/bits/erase_if.h \
  /usr/include/c++/13.1.1/functional \
- /usr/include/c++/13.1.1/bits/std_function.h
+ /usr/include/c++/13.1.1/bits/std_function.h /usr/include/string.h \
+ /usr/include/strings.h

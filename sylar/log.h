@@ -25,6 +25,7 @@ public:
     uint32_t getThreadId() const {return m_threadId;}
     uint32_t getFiberId() const {return m_fiberId;}
     uint64_t getTime() const {return m_time;}
+    const std::string& getThreadName() const { return m_threadName;}
     std::string  getContent() const {return m_ss.str();}
 
     std::stringstream& getSS() {return m_ss;}
@@ -32,10 +33,11 @@ public:
 private:
     const char*         m_file     = nullptr; //文件名
     int32_t             m_line     = 0;       //行号 //int32_t 是一个固定长度的整数类型，可以确保在不同的系统上使用相同长度的整数类型。
-    uint32_t            m_elapse   = 0;     //程序的启动到现在的毫秒数
+    uint32_t            m_elapse   = 0;       //程序的启动到现在的毫秒数
     uint32_t            m_threadId = 0;       //线程id 
     uint32_t            m_fiberId  = 0;       //协程id
-    uint64_t            m_time     = 0;               //时间戳
+    uint64_t            m_time     = 0;       //时间戳
+    std::string         m_threadName;         //线程名称
     std::stringstream   m_ss;
 };
 
@@ -74,9 +76,12 @@ public:
     };
 
     void init();
+    bool isError() const { return m_error;}
 private:
     std::string m_pattern;
     std::vector<FormatItem::ptr> m_items;
+    /// 是否有错误
+    bool m_error = false;
 };
 
 //日志输出地
@@ -92,7 +97,7 @@ public:
     LogFormatter::ptr getFormatter() const {return m_formatter;}
 
 protected: 
-    LogLevel::Level m_level;
+    LogLevel::Level m_level = LogLevel::DEBUG;
     LogFormatter::ptr m_formatter;
 };
 
