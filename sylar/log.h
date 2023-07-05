@@ -8,6 +8,8 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include <map>
+#include "singleton.h"
 
 /**
  * @brief 使用流式方式将日志级别level的日志写入到logger
@@ -50,7 +52,7 @@
     if(logger->getLevel() <= level) \
         sylar::LogEventWrap(sylar::LogEvent::ptr(new sylar::LogEvent(logger, level, \
                         __FILE__, __LINE__, 0, sylar::GetThreadId(),\
-                sylar::GetFiberId(), time(0), sylar::Thread::GetName()))).getEvent()->format(fmt, __VA_ARGS__)
+                sylar::GetFiberId(), time(0) /*,sylar::Thread::GetName()*/))).getEvent()->format(fmt, __VA_ARGS__)
 
 /**
  * @brief 使用格式化方式将日志级别debug的日志写入到logger
@@ -129,6 +131,7 @@ public:
 
     std::stringstream& getSS() {return m_ss;}
     void format(const char* fmt, ...);
+    void format(const char* fmt, va_list al);
 
 private:
     const char*         m_file     = nullptr; //文件名
@@ -150,7 +153,7 @@ class LogEventWrap
 public:
     LogEventWrap(LogEvent::ptr e);
     ~LogEventWrap();
-
+    LogEvent::ptr getEvent() const {return m_event;}
     std::stringstream& getSS();
 private:
     LogEvent::ptr m_event;
@@ -194,7 +197,8 @@ public:
 
     void setFormatter(LogFormatter::ptr val) {m_formatter = val;}
     LogFormatter::ptr getFormatter() const {return m_formatter;}
-
+    LogLevel::Level getLevel() const {return m_level;}
+    void setLevel(LogLevel::Level val) {m_level = val;}
 protected: 
     LogLevel::Level m_level = LogLevel::DEBUG;
     LogFormatter::ptr m_formatter;
@@ -251,6 +255,17 @@ private:
     std::ofstream m_filestream;
 };
 
-
+class LoggerManager
+{
+public:
+    LoggerManager();
+    Logger::ptr getLogger (const std::string& name);
+    
+    void init();
+private:
+    std::map<std::string, Logger::ptr> m_loggers;
+    Logger::ptr m_root;
+};
+typedef sylar::Singleton<LoggerManager> LoggerMgr;
 }
 #endif
