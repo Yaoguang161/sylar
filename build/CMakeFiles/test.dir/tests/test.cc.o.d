@@ -156,7 +156,12 @@ CMakeFiles/test.dir/tests/test.cc.o: \
  /usr/include/c++/13.1.1/bits/fstream.tcc /usr/include/c++/13.1.1/vector \
  /usr/include/c++/13.1.1/bits/stl_vector.h \
  /usr/include/c++/13.1.1/bits/stl_bvector.h \
- /usr/include/c++/13.1.1/bits/vector.tcc \
+ /usr/include/c++/13.1.1/bits/vector.tcc /usr/include/c++/13.1.1/map \
+ /usr/include/c++/13.1.1/bits/stl_tree.h \
+ /usr/include/c++/13.1.1/bits/stl_map.h \
+ /usr/include/c++/13.1.1/bits/stl_multimap.h \
+ /usr/include/c++/13.1.1/bits/erase_if.h \
+ /home/akie/workspace/sylar/tests/../sylar/singleton.h \
  /home/akie/workspace/sylar/tests/../sylar/util.h /usr/include/unistd.h \
  /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
  /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \

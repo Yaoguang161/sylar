@@ -156,11 +156,12 @@ CMakeFiles/sylar.dir/sylar/log.cc.o: \
  /usr/include/c++/13.1.1/bits/fstream.tcc /usr/include/c++/13.1.1/vector \
  /usr/include/c++/13.1.1/bits/stl_vector.h \
  /usr/include/c++/13.1.1/bits/stl_bvector.h \
- /usr/include/c++/13.1.1/bits/vector.tcc /usr/include/c++/13.1.1/iostream \
- /usr/include/c++/13.1.1/map /usr/include/c++/13.1.1/bits/stl_tree.h \
+ /usr/include/c++/13.1.1/bits/vector.tcc /usr/include/c++/13.1.1/map \
+ /usr/include/c++/13.1.1/bits/stl_tree.h \
  /usr/include/c++/13.1.1/bits/stl_map.h \
  /usr/include/c++/13.1.1/bits/stl_multimap.h \
  /usr/include/c++/13.1.1/bits/erase_if.h \
- /usr/include/c++/13.1.1/functional \
+ /home/akie/workspace/sylar/sylar/singleton.h \
+ /usr/include/c++/13.1.1/iostream /usr/include/c++/13.1.1/functional \
  /usr/include/c++/13.1.1/bits/std_function.h /usr/include/string.h \
  /usr/include/strings.h

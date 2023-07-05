@@ -2,6 +2,7 @@
 #define __SYLAR_SINGLETON_H__
 
 #include <iostream>
+#include <memory>
 
 namespace sylar
 {
