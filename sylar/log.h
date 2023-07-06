@@ -88,6 +88,10 @@
  * @brief 获取name的日志器
  */
 #define SYLAR_LOG_NAME(name) sylar::LoggerMgr::GetInstance()->getLogger(name)
+
+#define SYLAR_LOG_ROOT() sylar::LoggerMgr::GetInstance()->getRoot()
+
+
 namespace sylar 
 {
 class Logger;
@@ -262,6 +266,7 @@ public:
     Logger::ptr getLogger (const std::string& name);
     
     void init();
+    Logger::ptr getRoot() const {return m_root;}
 private:
     std::map<std::string, Logger::ptr> m_loggers;
     Logger::ptr m_root;

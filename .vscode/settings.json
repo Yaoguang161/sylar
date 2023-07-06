@@ -6,5 +6,4 @@
     ],
     "clangd.checkUpdates": true,
     "cmake.configureOnOpen": false,
-
 }
